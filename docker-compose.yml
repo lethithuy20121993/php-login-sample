@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  php:
+    image: php:7.0-apache  # PHP 7.0 image
+    container_name: php_app
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - "8000:80"
