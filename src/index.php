@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
         }
 
         if (!$found) {
-          echo "<script>showPopup('Login failed. Please try again.');</script>";
+          echo "<script>showPopup('Username or password is incorrect.');</script>";
         }
     } elseif ($_POST['action'] == 'signup') {
         $email = $_POST['email'];
