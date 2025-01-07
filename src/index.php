@@ -2,6 +2,9 @@
 // Start output buffering
 ob_start();
 
+// session start
+session_start();
+
 // Path to user storage file
 $usersFile = 'users.json';
 include 'popup.html';
@@ -37,6 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
         $found = false;
         foreach ($users as $user) {
             if ($user['email'] === $email && $user['password'] === $password) {
+                // save login status
+                $_SESSION['loggedin'] = true;
+                $_SESSION['email'] = $email;
+                
                 $found = true;
                 header('Location: success.php');
                 exit;

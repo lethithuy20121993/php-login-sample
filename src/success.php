@@ -1,3 +1,13 @@
+<?php
+    session_start();
+
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        // Redirect to login page
+        header('Location: index.php');
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,10 +26,23 @@
         p {
             font-size: 18px;
         }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
     <h1>Login Successful</h1>
     <p>Welcome to your dashboard!</p>
+    <a href="logout.php">Logout</a>
 </body>
 </html>
