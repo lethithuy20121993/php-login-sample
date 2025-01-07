@@ -3,13 +3,19 @@
 ob_start();
 
 // session start
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
+
+if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] === true) {
+  header('Location: success.php');
+  exit;
+}
 
 // Path to user storage file
 $usersFile = 'users.json';
 include 'popup.html';
-
-
 
 // Read data from json file
 function getUsers() {
@@ -41,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
         foreach ($users as $user) {
             if ($user['email'] === $email && $user['password'] === $password) {
                 // save login status
-                $_SESSION['loggedin'] = true;
+                $_SESSION['LoggedIn'] = true;
                 $_SESSION['email'] = $email;
                 
                 $found = true;
@@ -77,6 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
     } else {
       echo "<script>showPopup('No action');</script>";
     }
+  
 }
 
 // End output buffering and flush
